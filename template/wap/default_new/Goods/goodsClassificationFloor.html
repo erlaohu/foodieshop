@@ -1,0 +1,102 @@
+{extend name="wap/default_new/base" /}
+{block name="resources"}
+<link rel="stylesheet" type="text/css" href="__TEMP__/{$style}/public/css/components.css">
+<link rel="stylesheet" type="text/css" href="__TEMP__/{$style}/public/css/categoryFloor.css">
+<style>
+.controlSearch {width: 85%;padding: 6px 0;background: none;margin: 0 0 0 9%;}
+.controlSearch .control-search-input{height: 30px;border-bottom-left-radius: 0;border-top-left-radius: 0;overflow: hidden;border-bottom-right-radius: 0;border-top-right-radius: 0;}
+.controlSearch .control-search-input .search-input {width: 72%;height: 30px;line-height: 30px;margin: 0;padding: 0 15px;border: none;color: #999;float: left;font-size: 13px;background:#fff;}
+.controlSearch .control-search-input .search-button{margin: 4px 0;}
+</style>
+{/block}
+{block name="goodsHead"}
+<section class="head">
+	<a class="head_back" id="head_back" href="{:__URL('APP_MAIN')}"><i class="icon-back"></i></a>
+	<div class="head-title"><span>{include file='wap/default_new/Index/controlSearch'/}</span></div>
+</section>
+{/block}
+
+{block name="main"}
+<div class="custom-tag-list">
+	<div class="custom-menu-block">
+		<ul>
+			{foreach name="goods_category_list" item="vo" key="k"}
+			<li {if $k eq 0}class="current"{/if}><a href="javascript:;" data-id="{$vo.category_id}">{$vo.short_name}</a></li>
+			{/foreach}
+		</ul>
+	</div>
+	
+	<div class="custom-list-goods">
+		{foreach name="goods_category_list" item="vo" key="k"}
+		<div class="content" {if $k eq 0}style="display:block;"{/if} data-pid="{$vo.category_id}">
+			<div class="category">
+				{notempty name="$vo.category_pic"}
+				<div class="one_category_pic">
+					<img src="{:__IMG($vo.category_pic)}" alt="">
+				</div>
+				{/notempty}
+				<a href="{:__URL('APP_MAIN/goods/goodslist','category_id='.$vo['category_id'])}" class="one_category">{$vo.category_name}</a>
+			</div>
+			{if count($vo['child_list']) > 0}
+				{foreach name="$vo['child_list']" item="so"}
+					<a href="{:__URL('APP_MAIN/goods/goodslist','category_id='.$so['category_id'])}" ><h4 class="category_title">{$so.category_name}</h4></a>
+					<!-- 三级分类 -->
+					{if count($so['child_list']) > 0}
+						<div class="three_categorty_box">
+							<ul>
+								{foreach name="$so['child_list']" item="to"}
+								<li>
+									<a class="cate_pic" href="{:__URL('APP_MAIN/goods/goodslist','category_id='.$to['category_id'])}"><img src="__TEMP__/{$style}/public/images/category_pic_empty.png" class="lazy_load" data-original="{:__IMG($to.category_pic)}" alt=""></a>
+									<p class="cate_name">{$to.category_name}</p>
+								</li>		
+								{/foreach}			
+							</ul>
+						</div>
+					{else/}
+						<div class="three_categorty_box">
+							<ul>
+								<li>
+									<a class="cate_pic" href="{:__URL('APP_MAIN/goods/goodslist','category_id='.$so['category_id'])}"><img src="__TEMP__/{$style}/public/images/category_pic_empty.png" class="lazy_load" data-original="{:__IMG($so.category_pic)}" alt=""></a>
+									<p class="cate_name">{$so.category_name}</p>
+								</li>		
+							</ul>
+						</div>
+					{/if}
+				{/foreach}
+			{/if}
+		</div>
+		{/foreach}
+	</div>
+
+</div>
+
+<script>
+	$(function(){
+		bottomActive('#bottom_classify');
+		$("img.lazy_load").lazyload({
+			threshold : 0,
+			effect : "fadeIn", //淡入效果
+			skip_invisible : false,
+			container: $(".custom-list-goods")
+		})
+	});
+	// 点击显示分类
+	$(".custom-menu-block ul li").click(function(){
+		$(".custom-menu-block ul li").removeClass("current");
+		$(this).addClass("current");
+		var ca_id = $(this).children("a").data("id");
+		$(".custom-list-goods .content").hide();
+		$("[data-pid='"+ca_id+"']").show();
+
+		$("img.lazy_load").lazyload({
+			threshold : 0,
+			effect : "fadeIn", //淡入效果
+			skip_invisible : false,
+			container: $(".custom-list-goods")
+		})
+		
+	})
+
+
+</script>
+{/block}

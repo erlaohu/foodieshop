@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta name="renderer" content="webkit" />
+	<meta http-equiv="X-UA-COMPATIBLE" content="IE=edge,chrome=1"/>
+	<meta content="text/html; charset=UTF-8">
+	<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	{if $frist_menu.module_name=='首页'}
+	<title>{$title_name} - 商家管理</title>
+	{else /}
+		<title>{$title_name} - {$frist_menu.module_name}管理</title>
+	{/if}
+	<link rel="shortcut icon" type="image/x-icon" href="ADMIN_IMG/admin_icon.ico" media="screen"/>
+	<link rel="stylesheet" type="text/css" href="__STATIC__/blue/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="__STATIC__/blue/css/ns_blue_common.css" />
+	<link rel="stylesheet" type="text/css" href="__STATIC__/font-awesome/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="__STATIC__/simple-switch/css/simple.switch.three.css" />
+	<link rel="stylesheet" type="text/css" href="ADMIN_CSS/selectric.css" />
+	<style>
+	.Switch_FlatRadius.On span.switch-open{background-color: #126AE4;border-color: #126AE4;}
+	#copyright_meta a{color:#333;}
+	</style>
+	<script src="__STATIC__/js/jquery-1.8.1.min.js"></script>
+	<script src="__STATIC__/blue/bootstrap/js/bootstrap.js"></script>
+	<script src="__STATIC__/bootstrap/js/bootstrapSwitch.js"></script>
+	<script src="__STATIC__/simple-switch/js/simple.switch.js"></script>
+	<script src="__STATIC__/js/jquery.unobtrusive-ajax.min.js"></script>
+	<script src="__STATIC__/js/common.js"></script>
+	<script src="__STATIC__/js/seller.js"></script>
+	<script src="__STATIC__/js/load_task.js"></script>
+	<script src="__STATIC__/js/load_bottom.js" type="text/javascript"></script>
+	<script src="ADMIN_JS/layer/layer.js"></script>
+	<script src="ADMIN_JS/jquery-ui.min.js"></script>
+	<script src="ADMIN_JS/ns_tool.js"></script>
+	<script src="ADMIN_JS/jquery.selectric.js"></script>
+	<link rel="stylesheet" type="text/css" href="__STATIC__/blue/css/ns_table_style.css">
+	
+	{include file="adminblue/controlCommonVariable" }
+	{block name="resources"/}{/block}
+	</head>
+<body>
+{include file="adminblue/urlModel"}
+<article class="ns-mobile-article">
+
+	<header class="ns-mobile-header">
+		<div class="ns-logo" onclick="location.href='{:__URL('ADMIN_MAIN')}';"></div>
+		<span>吃货在日本</span>
+		<div class="ns-base-tool">
+			<i class="i-close" title="退出登录"><a href="{:__URL('ADMIN_MAIN/login/logout')}"></a></i>
+		</div>
+	</header>
+	
+	<section class="ns-mobile-main">
+		
+		<!-- 操作提示 -->
+		{block name="warm_prompt"}
+<!-- 		{if condition="$warm_prompt_is_show == 'hidden'"}style="display:none;"{/if} -->
+		<div class="ns-warm-prompt" style="display:none;">
+			<div class="alert alert-info">
+				<button type="button" class="close">&times;</button>
+				<h4>
+<!-- 					{1block name="alert_info"} -->
+<!-- 					<i class="fa fa-info-circle"></i> -->
+<!-- 					<span class="operating-hints">操作提示</span> -->
+<!-- 						{if condition="$secend_menu.desc"} -->
+<!-- 						<span>{$secend_menu.desc}</span> -->
+<!-- 						{/if} -->
+<!-- 					{1/block} -->
+				</h4>
+			</div>
+		</div>
+		{/block}
+		
+		<div class="ns-mobile-main">
+			{block name="main"}{/block}
+			{include file="adminblue/pageCommon"}
+		</div>
+		
+	</section>
+	
+<!-- 	<footer class="ns-footer">
+		<p>
+			<a id="copyright_companyname" style="color: #333" target="_blank"></a>
+		</p>
+	</footer> -->
+</article>
+
+<!-- 公共的操作提示弹出框 common-success：成功，common-warning：警告，common-error：错误，-->
+<div class="common-tip-message js-common-tip">
+	<div class="tip-container">
+		<span class="inner"></span>
+	</div>
+</div>
+
+{include file="adminblue/openDialog" /}
+<script src="ADMIN_JS/ns_common_base.js"></script>
+<script src="__STATIC__/blue/js/ns_common_blue.js"></script>
+<script>
+	window.onload = function(){
+
+	}
+$(function(){
+	
+	$(".ns-third-menu ul .btn-more").toggle(
+		function(){
+			$(".ns-third-menu ul").animate({height:"84px"},300);
+		},
+		function(){
+			$(".ns-third-menu ul").animate({height:"42px"},300);
+		}
+	);
+	
+	//公共下拉框
+	$('.select-common').selectric();
+	
+	//公共复选框点击切换样式
+	$(".checkbox-common").live("click",function(){
+		var checkbox = $(this).children("input");
+		if(checkbox.is(":checked")) $(this).addClass("selected");
+		else $(this).removeClass("selected");
+	});
+	
+	//鼠标浮上查看预览上传的图片
+	$(".upload-btn-common>img,#preview_adv").live("mouseover",function(){
+		var curr = $(this);
+		var src = curr.attr("data-src");
+		if(src){
+			//alert(src);
+			var contents = '<img src="'+src+'" style="width: 100px;height: auto;display:block;margin:0 auto;">';
+			//鼠标每次浮上图片时，要销毁之前的事件绑定
+			curr.popover("destroy");
+			
+			//重新配置弹出框内容
+			curr.popover({ content : contents });
+
+			//显示
+			curr.popover("show");
+		}
+	});
+	
+	//鼠标离开隐藏预览上传的图片
+	$(".upload-btn-common>img,#preview_adv").live("mouseout",function(){
+		var curr = $(this);
+		//隐藏
+		if($(".popover.top").is(":visible") && curr.attr("data-src")) curr.popover("hide");
+	});
+
+	//公共单选框点击切换样式
+	$(".radio-common").live("click",function(){
+		var radio = $(this).children("input");
+		var name = radio.attr("name");
+		if(radio.is(":checked")){
+			$(".radio-common>input[type='radio'][name='" + name + "']").parent().removeClass("selected");
+			$(this).addClass("selected");
+		}else{
+			$(this).removeClass("selected");
+		}
+	});
+
+	//顶部导航管理显示隐藏
+	$(".ns-navigation-title>span").click(function(){
+		$(".ns-navigation-management").slideUp(400);
+	});
+	
+	$(".js-nav").toggle(function(){
+		$(".ns-navigation-management").slideDown(400);
+	},function(){
+		$(".ns-navigation-management").slideUp(400);
+	});
+	
+	//搜索展开
+	$(".ns-search-block").hover(function(){
+		if($(this).children(".mask-layer-search").is(":hidden")) $(this).children(".mask-layer-search").fadeIn(300);
+	},function(){
+		if($(this).children(".mask-layer-search").is(":visible")) $(this).children(".mask-layer-search").fadeOut(300);
+	});
+	
+	$(".ns-base-tool .ns-help").hover(function(){
+		if($(this).children("ul").is(":hidden")) $(this).children("ul").fadeIn(250);
+	},function(){
+		if($(this).children("ul").is(":visible")) $(this).children("ul").fadeOut(250);
+	});
+	
+});
+
+</script>
+{block name="script"}{/block}
+</body>
+</html>

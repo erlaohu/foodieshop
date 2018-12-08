@@ -1,0 +1,268 @@
+@charset "UTF-8";
+
+/**
+ *
+ * @authors zx.wang (zx.wang1991@gmail.com)
+ * @date    2016-10-09 11:08:08
+ * @version $Id$
+ */
+body, div, ul, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+  padding: 0;
+  margin: 0;
+}
+ul, li {
+  list-style: none;
+  list-style-type: none;
+}
+.page {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.date-scroll div {
+  float: left;
+  margin-left: 10%;
+  margin-top: 15px;
+  padding-right: 22px;
+  overflow: hidden;
+}
+.date-scroll-datetime div {
+  float: left;
+  margin-left: 10%;
+  padding-right: 22px;
+  overflow: hidden;
+}
+.year-wrapper {
+  position: absolute;
+  left: 0;
+  top: 45px;
+  bottom: 60px;
+  width: 80%;
+}
+.month-wrapper {
+  position: absolute;
+  left: 26%;
+  top: 45px;
+  bottom: 60px;
+  width: 80%;
+}
+.day-wrapper {
+  position: absolute;
+  left: 50%;
+  top: 45px;
+  bottom: 60px;
+  width: 80%;
+}
+.hour-wrapper {
+  position: absolute;
+  left: 0;
+  top: 195px;
+  bottom: 68px;
+  width: 80%;
+}
+.minute-wrapper {
+  position: absolute;
+  left: 26%;
+  top: 195px;
+  bottom: 68px;
+  width: 80%;
+}
+.second-wrapper {
+  position: absolute;
+  left: 50%;
+  top: 195px;
+  bottom: 68px;
+  width: 80%;
+}
+
+/*增加手指滑动触摸面积*/
+.hour-wrapper ul li {
+  color: #898989;
+  font-size: 16px;
+}
+.minute-wrapper ul li {
+  color: #898989;
+  font-size: 16px;
+}
+.second-wrapper ul li {
+  color: #898989;
+  font-size: 16px;
+}
+.year-wrapper ul li {
+  color: #898989;
+  font-size: 16px;
+}
+.month-wrapper ul li {
+  color: #898989;
+  font-size: 16px;
+}
+.day-wrapper ul li {
+  color: #898989;
+  font-size: 16px;
+}
+.mark-year {
+  position: relative;
+  margin-left: 76px;
+  top: -2px;
+}
+.mark-month {
+  position: relative;
+  margin-left: 40px;
+  top: -2px;
+}
+.mark-day {
+  position: relative;
+  margin-left: 42px;
+  top: -2px;
+}
+.mark-hour {
+  position: relative;
+  margin-left: 62px;
+  top: -2px;
+}
+.mark-minute {
+  position: relative;
+  margin-left: 58px;
+  top: -2px;
+}
+.mark-second {
+  position: relative;
+  margin-left: 68px;
+  top: -2px;
+}
+.date-header {
+  width: 100%;
+  height: 50px;
+  background: #F44;
+  text-align: center;
+  color: #fff;
+  line-height: 50px;
+  font-size: 20px;
+}
+.set-cancel ul {
+  text-align: center;
+  line-height: 30px;
+  margin: 1px auto;
+  font-size: 20px;
+}
+.set-cancel ul li {
+  border-radius: 0;
+  float: left;
+  width: 40%;
+  height: 30px;
+  list-style-type: none;
+  font-family: 'microsoft yahei';
+  font-size: 16px;
+}
+.date-confirm {
+  position: absolute;
+  background: #F44;
+  left: 20px;
+  color: #fff;
+}
+.date-cancel {
+  position: absolute;
+  background: #dcdddd;
+  right: 20px;
+  width: 40%;
+  color: #666;
+}
+.date-shadow {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: #000;
+  filter: alpha(Opacity=50);
+  -moz-opacity: 0.5;
+  opacity: 0.5;
+  z-index: 99999;
+}
+.date-page {
+  font-size: 22px;
+  border-radius: 0;
+  position: fixed;
+  top: 40%;
+  MARGIN-RIGHT: auto;
+  vertical-align: middle;
+  MARGIN-LEFT: auto;
+  width: 260px;
+  height: 240px;
+  background: #FFFFFF;
+  z-index: 9999999;
+}
+.date-title {
+  width: 100%;
+  height: 42px;
+  background: #F44;
+  text-align: center;
+  color: #fff;
+  line-height: 42px;
+  font-size: 14px;
+  font-family: 'microsoft yahei';
+}
+.date-title h1 {
+  font-weight: normal;
+}
+.date-mark {
+  font-size: 18px;
+  left: 5%;
+  width: 90%;
+  height: 32px;
+  position: absolute;
+  top: 104px;
+  background: #eee;
+  border: 1px solid #eee;
+}
+.time-mark {
+  font-size: 18px;
+  left: 5%;
+  width: 90%;
+  height: 20px;
+  position: absolute;
+  top: 242px;
+  background: #eee;
+  border: 1px solid #eee;
+}
+.date-scroll {
+  background: #F8F8F8;
+  width: 94%;
+  margin: 10px 3%;
+  border: 1px solid #E0E0E0;
+  border-radius: 4px;
+  height: 132px;
+  text-align: center;
+  line-height: 40px;
+}
+.date-scroll-datetime {
+  display: none;
+  background: #F8F8F8;
+  width: 94%;
+  margin: 10px 3%;
+  margin-top: 10px;
+  border: 1px solid #E0E0E0;
+  border-radius: 4px;
+  height: 120px;
+  text-align: center;
+  line-height: 40px;
+}
+.year-wrapper ul, .month-wrapper ul, .day-wrapper ul {
+  width: 40%;
+}
+.hour-wrapper ul, .minute-wrapper ul, .second-wrapper ul {
+  width: 40%;
+}
+.date-footer {
+  width: 100%;
+  height: 50px;
+  bottom: -5px;
+  position: absolute;
+}

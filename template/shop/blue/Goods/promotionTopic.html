@@ -1,0 +1,47 @@
+{extend name="shop/blue/base" /}
+{block name="resources"}
+<!-- 添加css、字体文件文件 -->
+<link type="text/css" rel="stylesheet" href="__TEMP__/{$style}/public/css/ns_topic.css">
+<link type="text/css" rel="stylesheet" href="__TEMP__/{$style}/public/css/ns_sale.css">
+<link type="text/css" rel="stylesheet" href="__TEMP__/{$style}/public/css/ns_default.css">
+{/block}
+{block name="main"}
+	<div class="banner">
+		<ul class="full-screen-slides" id="fullScreenSlides" ></ul>
+		<ul class="full-screen-slides-pagination" style="height:0px;"></ul>
+	</div>
+	<div class="w1210">
+		<div class="sale-container">
+		
+			<div class="wrapper">
+				{include file='shop/blue/Goods/controlTopic'/}
+			</div>
+		</div>
+		{include file='shop/blue/controlLoveOrHistory' /}
+	</div>
+{/block}
+{block name="javascript"}
+<script type="text/javascript" src="__TEMP__/{$style}/public/js/ns_brand.js"></script>
+<script type="text/javascript" src="__TEMP__/{$style}/public/js/ns_index.js"></script>
+<script type="text/javascript">
+	var data=platformAdvByApkeyword("promotionTopic")['adv_list'];
+	var str="";
+	var slideshtml='';
+	for(var i=0;i<data.length;i++){
+			if(i==0){
+				str+='<li style="background:'+data[i]['background']+' url('+__IMG(data[i]['adv_image'])+') no-repeat 50% 50%;"><a href="'+data[i]['adv_url']+'" target="_blank" title="">&nbsp;</a> </li>';
+			}else{
+				str+='<li style="display: none;background:'+data[i]['background']+' url('+__IMG(data[i]['adv_image'])+') no-repeat 50% 50% ;"><a href="'+data[i]['adv_url']+'" target="_blank" title="">&nbsp;</a> </li>';
+			}
+		}
+	for(var i=1;i<=data.length;i++){
+		if(i==1){
+			slideshtml+='<li class="current"><a href="javascript:void(0);">'+i+'</a></li>';	
+		}else{
+			slideshtml+='<li><a href="javascript:void(0);">'+i+'</a></li>';
+		}
+	}
+	$('#fullScreenSlides').html(str);
+	$('.full-screen-slides-pagination').html(slideshtml);
+</script>
+{/block}

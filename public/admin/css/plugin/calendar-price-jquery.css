@@ -1,0 +1,527 @@
+/*! calendar-price-jquery v1.0.8 | (c) zx1984 | https://github.com/zx1984/calendar-price-jquery */
+
+.clearfix:after {
+    content: '';
+    display: block;
+    overflow: hidden;
+    visibility: hidden;
+    font-size: 0;
+    line-height: 0;
+    width: 0;
+    height: 0;
+    clear: both
+}
+
+.calendar-container {
+    margin: 0 auto;
+    color: #333;
+    font-size: 1em;
+    background-color: #fff;
+}
+
+.calendar-container .calendar-head-wrapper {
+    position: relative;
+    height: 32px;
+    background-color: #d9edf7;
+}
+
+.calendar-container .calendar-head-wrapper .calendar-month-title {
+    text-align: center;
+    font-size: 1em;
+    line-height: 32px;
+    color: #3a87ad;
+    font-weight: bold;
+}
+
+.calendar-container .calendar-head-wrapper a {
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 60px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #fff;
+    color: #999;
+    margin: 3px;
+    border: 1px solid #bbb;
+}
+
+.calendar-container .calendar-head-wrapper a.prev-month {
+    left: 0;
+}
+
+.calendar-container .calendar-head-wrapper a.next-month {
+    right: 0
+}
+
+.calendar-container .calendar-table-wrapper {
+    height: 600px;
+    overflow-y: auto;
+}
+
+.calendar-container .calendar-table-wrapper table {
+    width: 100%;
+    border: 1px solid #eee;
+}
+
+.calendar-container .calendar-table-wrapper table .week {
+    background-color: #d9edf7;
+    color: #3a87ad;
+}
+
+.calendar-container .calendar-table-wrapper table .week th {
+    width: 14.2%;
+    line-height: 22px;
+    font-weight: bold;
+    padding: 0;
+}
+
+.calendar-container .calendar-table-wrapper table td {
+    position: relative;
+    vertical-align: top;
+    height: 93px;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    border-right: 1px solid #eee;
+    padding: 0;
+}
+
+.calendar-container .calendar-table-wrapper table td:last-child {
+    border-right: 0
+}
+
+.calendar-container .calendar-table-wrapper table td.disabled {
+    color: #ccc
+}
+
+.calendar-container .calendar-table-wrapper table td b {
+    display: block;
+    text-align: right;
+    line-height: 1.5;
+    padding: 2px 5px;
+}
+
+.calendar-container .calendar-table-wrapper table td div {
+    font-size: 12px;
+    color: #098cc2;
+}
+
+.calendar-container .calendar-table-wrapper table td div p {
+    margin: 0 5px;
+    padding: 1px;
+    height: 15px;
+}
+
+.calendar-container .calendar-table-wrapper table td div label.normal {
+    padding-left: 3px;
+    background-color: #e47911;
+    color: #fff;
+    margin-bottom: 0;
+}
+
+.calendar-container .calendar-table-wrapper table td div label.child {
+    padding-left: 3px;
+    margin-top: 5px;
+    background-color: #269f42;
+    color: #fff;
+    margin-bottom: 0;
+}
+
+.calendar-container .calendar-table-wrapper table td div label.title {
+    padding-left: 3px;
+    background-color: #269f42;
+    color: #fff;
+    margin-bottom: 0;
+    line-height: 18px;
+}
+
+.calendar-container .calendar-table-wrapper table td.valid-hook:hover {
+    background-color: #d9edf7;
+}
+
+.calendar-container .calendar-foot-wrapper,
+.date-detailed-settings .cddsw-foot-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 60px;
+}
+
+.calendar-container .calendar-foot-wrapper button,
+.date-detailed-settings .cddsw-foot-wrapper button {
+    display: inline-block;
+    margin-right: 10px;
+    width: 70px;
+    height: 30px;
+    text-align: center;
+    cursor: pointer;
+    border: 0;
+    background: none;
+    outline: none;
+    color: #fff;
+}
+
+.calendar-container .calendar-foot-wrapper button:last-child,
+.date-detailed-settings .cddsw-foot-wrapper button:last-child {
+    margin-right: 0px
+}
+
+.calendar-container .calendar-foot-wrapper button.btn-reset,
+.date-detailed-settings .cddsw-foot-wrapper button.btn-reset {
+    background-color: rgba(85, 181, 38, 0.8);
+    border: 1px solid rgba(85, 181, 38, 0.8);
+}
+
+.calendar-container .calendar-foot-wrapper button.btn-reset:hover,
+.date-detailed-settings .cddsw-foot-wrapper button.btn-reset:hover {
+    background-color: #55b526;
+    border-color: #55b526
+}
+
+.calendar-container .calendar-foot-wrapper button.btn-save,
+.date-detailed-settings .cddsw-foot-wrapper button.btn-save {
+    background-color: #126AE4;
+    border: 1px solid #126AE4;
+}
+
+.calendar-container .calendar-foot-wrapper button.btn-save:hover,
+.date-detailed-settings .cddsw-foot-wrapper button.btn-save:hover {
+    background-color: #0088cc;
+    border-color: #0088cc
+}
+
+.calendar-container .calendar-foot-wrapper button.btn-cancel,
+.date-detailed-settings .cddsw-foot-wrapper button.btn-cancel {
+    background-color: #999;
+    color: #fff;
+    border: 1px solid #999;
+}
+
+.calendar-container .calendar-foot-wrapper button.btn-cancel:hover,
+.date-detailed-settings .cddsw-foot-wrapper button.btn-cancel:hover {
+    background-color: #aaa;
+    border-color: #aaa;
+}
+
+.calendar-container .calendar-foot-wrapper button.btn-save.btn-year,
+.date-detailed-settings .cddsw-foot-wrapper button.btn-save.btn-year {
+    background-color: #f89406;
+    color: #fff;
+    border: 1px solid #f89406;
+}
+
+.calendar-container .calendar-foot-wrapper button.btn-save.btn-year:hover,
+.date-detailed-settings .cddsw-foot-wrapper button.btn-save.btn-year:hover {
+    background-color: #faa732;
+    border-color: #faa732;
+}
+
+.date-detailed-settings {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.date-detailed-settings .cddsw-container {
+    position: relative;
+    background-color: #fff;
+    font-size: 14px;
+}
+
+.date-detailed-settings .cddsw-container * {
+    margin: 0;
+    padding: 0
+}
+
+.date-detailed-settings .cddsw-container .cddsw-head-wrapper {
+    height: 35px;
+    line-height: 35px;
+    position: relative;
+    background: #d9edf7;
+}
+
+.date-detailed-settings .cddsw-container .cddsw-head-wrapper .cddsw-title {
+    color: #3a87ad;
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+.date-detailed-settings .cddsw-container .cddsw-head-wrapper .cddsw-close {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    top: 0;
+    width: 46px;
+    height: 46px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.date-detailed-settings .cddsw-container .cddsw-head-wrapper .cddsw-close i {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-top: 11px;
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ppVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpFODc3OUU2QjNGNkIxMUU2QkQxMUIxRENFMjQwRTA3NiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo1MjYzNUUzQjUzNjExMUU3OTY5OUIxQjZEODgwMzYxMyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo1MjYzNUUzQTUzNjExMUU3OTY5OUIxQjZEODgwMzYxMyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgMjAxNCAoV2luZG93cykiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2RUJDQzE1QThERjMxMUU2OTE5NEVGNDg3OUM4QTE0RiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo2RUJDQzE1QjhERjMxMUU2OTE5NEVGNDg3OUM4QTE0RiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pl7a5jgAAACESURBVHjaYvz//z8DLQETA43BqAWD24KbQNxMhBnNULXYASiZ4sDN/yGgHo+aeqiaZlxq8FmAbEA9iXJEWwDC1VgMghleRUg/MRaAcCXUwAoo/g8VY6CWBSBc/B8BionVR/NkOiiCiKaRTNNkSvOMdhOfRjSH3MQlzzhao41aQDEACDAAkcb7Ue21oJQAAAAASUVORK5CYII=") no-repeat 0 0;
+    opacity: .6
+}
+
+.date-detailed-settings .cddsw-container .cddsw-head-wrapper .cddsw-close:hover i {
+    opacity: 1
+}
+
+.date-detailed-settings .cddsw-container .cddsw-form-wrapper {
+    padding-top: 0px;
+    width: 100%;
+}
+
+.date-detailed-settings .cddsw-container .cddsw-form-wrapper li {
+    display: flex;
+    position: relative;
+    float: left;
+    height: 40px;
+    line-height: 31px;
+    width: 100%;
+    list-style: none;
+}
+
+.date-detailed-settings .cddsw-container .cddsw-form-wrapper li label {
+    width: 50px;
+    margin: 3px 10px;
+    text-align: right;
+}
+
+.date-detailed-settings .cddsw-container .cddsw-form-wrapper li input {
+    margin-right: 0px;
+    padding: 0 4px;
+    height: 25px;
+    line-height: 25px;
+    border: 1px solid #ddd;
+    background: #fff;
+    width: 100px;
+    border-radius: 0px;
+}
+
+.date-detailed-settings .cddsw-container .cddsw-batch-settings {
+    border-top: 1px solid #ddd;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+}
+
+.date-detailed-settings .cddsw-container .cddsw-batch-settings .bs-title {
+    margin-left: 15px;
+    padding: 0 5px;
+    height: 35px;
+    line-height: 35px;
+    font-size: 14px
+}
+
+.date-detailed-settings .cddsw-container .cddsw-batch-settings .bs-content {
+    display: flex;
+    margin-top: 15px;
+}
+
+.date-detailed-settings .cddsw-container .cddsw-batch-settings .bs-content .bs-lable {
+    flex: 0 0 80px;
+    text-align-last: justify;
+    margin-left: 20px;
+    margin-right: 10px;
+    height: 32px;
+    line-height: 32px
+}
+
+.date-detailed-settings .cddsw-container .cddsw-batch-settings .bs-content .bs-options-wrapper {
+    flex: 1;
+    flex-wrap: wrap;
+    height: 32px;
+    line-height: 32px;
+}
+
+.date-detailed-settings .cddsw-container .cddsw-batch-settings .bs-content .bs-options-wrapper .drw-enable {
+    margin-left: 10px
+}
+
+.date-detailed-settings .cddsw-container .cddsw-batch-settings .bs-content .bs-options-wrapper .itext {
+    padding: 0 4px;
+    width: 179px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid #ddd;
+    background: #fff
+}
+
+.date-detailed-settings .cddsw-container .cddsw-batch-settings .bs-week-chekbox {
+    display: flex;
+    margin-top: 15px;
+}
+
+.date-detailed-settings .cddsw-container .cddsw-batch-settings .bs-week-chekbox .bs-options-wrapper {
+    display: flex;
+}
+
+.date-detailed-settings .cddsw-container .cddsw-batch-settings .bs-week-chekbox .bs-options-wrapper label {
+    flex: 1
+}
+
+
+#calendarPrice {
+    width: 73%;
+    float: left;
+}
+
+#calendarPriceSetting,
+#calendarSkuList {
+    margin-left: 1%;
+    width: 25%;
+    float: left;
+}
+
+#calendarPriceSetting .error-msg {
+    display: block;
+    width: 100%;
+    height: 30px;
+    color: red;
+}
+
+#calendarSkuList #sku_list {
+    display: inline-flex;
+    margin-top: 5px;
+    width: calc(100% - 70px);
+    max-width: calc(100% - 70px);
+    flex-wrap: wrap;
+}
+
+#calendarSkuList #sku_list li {
+    float: left;
+    position: relative;
+    margin: 0 4px 4px 0;
+    line-height: 20px;
+    vertical-align: middle;
+}
+#calendarSkuList #sku_list li a:hover,
+#calendarSkuList #sku_list li.selected a {
+    border: 2px solid #0689e1;
+    margin: -1px;
+}
+#calendarSkuList #sku_list li a {
+    float: left;
+    background-color: #fff;
+    padding: 2px 9px;
+    text-align: center;
+    border: 1px solid #b8b7bd;
+    color: #000;
+    display: inline-block;
+    width: 60px;
+}
+#calendarSkuList #sku_list li.selected i {
+    position: absolute;
+    bottom: 0.8px;
+    right: 1px;
+    width: 12px;
+    height: 12px;
+    overflow: hidden;
+    display: block;
+    background: url(../../images/goods-icon.png) no-repeat;
+    background-position: 0px -20px;
+}
+#calendarSkuList #sku_list li a span {
+  vertical-align: middle;
+  height: inherit;
+  word-break: keep-all;
+  overflow: hidden;
+  display: block;
+}
+
+.selectedDate > div {
+    background-color: #d9edf7;
+    width: 100%;
+    height: 100%;
+}
+
+.date-detailed-settings .cddsw-container .bs-options-daterange {
+    margin: 2px 0 6px 0;
+}
+
+.date-detailed-settings .cddsw-container .bs-options-daterange span,
+#calendarSkuList span.bs-lable {
+    display: inline-block;
+    width: 65px;
+    margin-top: 5px;
+}
+
+#calendarSkuList span.bs-lable {
+    vertical-align: top;
+    margin-top: 10px;
+}
+.date-detailed-settings .cddsw-container .bs-options-daterange span.small-size {
+    font-size: smaller;
+    width: 200px;
+}
+
+.date-detailed-settings .cddsw-container .bs-options-daterange label {
+    display: inline-block;
+    width: 50px;
+    margin-top: 5px;
+}
+
+.date-detailed-settings .cddsw-container .bs-options-daterange label.year {
+    width: 80px;
+}
+
+.date-detailed-settings .cddsw-container .bs-options-daterange button {
+    padding: 3px !important;
+    width: 80px;
+    background-color: #fff;
+    border: 1px solid #bbb;
+}
+
+.date-detailed-settings .cddsw-container .add-on {
+    line-height: 25px;
+    background-color: #E6E6E6;
+    text-align: center;
+    width: 25px;
+    height: 25px;
+    border: solid #CCC;
+    border-width: 1px 1px 1px 0;
+    padding-right: 3px;
+}
+
+@media only screen and (max-width: 640px) {
+    .date-detailed-settings {
+        display: block;
+        position: absolute;
+    }
+
+    .date-detailed-settings .cddsw-container {
+        width: 100%;
+    }
+
+    .date-detailed-settings .cddsw-container .cddsw-form-wrapper li {
+        width: 100%
+    }
+
+    .date-detailed-settings .cddsw-container .cddsw-batch-settings .bs-content {
+        display: block;
+    }
+
+    .date-detailed-settings .cddsw-container .cddsw-batch-settings .bs-content .bs-options-wrapper {
+        margin-left: 20px;
+        height: auto;
+    }
+
+    .date-detailed-settings .cddsw-container .cddsw-batch-settings .bs-content .bs-options-wrapper .itext {
+        width: 80px
+    }
+
+    .date-detailed-settings .cddsw-container .cddsw-batch-settings .bs-content .bs-options-wrapper label {
+        flex: 0 0 25%
+    }
+}

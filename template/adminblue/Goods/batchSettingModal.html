@@ -1,0 +1,53 @@
+<!-- 功能说明：批量设置弹出框 -->
+<link rel="stylesheet" type="text/css" href="ADMIN_CSS/plugin/calendar-price-jquery.css" />
+<style type="text/css">
+	#batch_setting.modal.fade.in {
+		position: absolute;
+		top: -5px;
+		left: 210px;
+		width: 100%;
+		height: 680px;
+	}
+	#batch_setting.modal .modal-dialog, 
+	#batch_setting.modal .modal-dialog .modal-content,
+	#batch_setting.modal .modal-dialog .modal-content .modal-body {
+		width: 100%;
+		height:100%;
+		max-height: 100%;
+	}
+	#batch_setting .modal-header h3 {
+		font-size: 16px;
+		height: 25px;
+		max-height: 25px;
+	}
+	#batch_setting .modal-body {
+		padding: 3px;
+	}
+</style>
+<div class="modal fade hide" id="batch_setting" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" onclick="closeModal();" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3>批量设置</h3>
+			</div>
+			<div class="modal-body">
+				<div id="calendarPrice"></div>
+				<div id="calendarSkuList">
+					<span class="bs-lable">规格筛选</span>
+					<ul id="sku_list"></ul>
+				</div>
+				<div id="calendarPriceSetting"></div>
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+<script type="text/javascript" src="ADMIN_JS/plugin/calendar-price-jquery.js"></script>
+<script type="text/javascript">
+function closeModal () {
+	$("#calendarPrice").empty();
+	$("#calendarPriceSetting").empty();
+}
+</script>
